@@ -44,7 +44,18 @@ export class TarefasController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tarefasService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const { affected } = await this.tarefasService.remove(+id);
+    if (affected === 1) {
+      return {
+        estado: 'ok',
+        mensagem: `tarefa ${id} removida com sucesso`,
+      };
+    } else {
+      return {
+        estado: 'nok',
+        mensagem: `tarefa ${id} NÃO removida`,
+      };
+    }
   }
 }

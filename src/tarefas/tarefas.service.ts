@@ -29,6 +29,6 @@ export class TarefasService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} tarefa`;
+    return this.tarefaRepository.delete(id);
   }
 }
